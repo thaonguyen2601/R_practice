@@ -31,7 +31,7 @@ head(movie)
 str(movie)
 ```
 ![alt text](headmovie.PNG "Logo Title Text 1")
-![alt text](str.png "Logo Title Text 1")
+![alt text](strmovie.png "Logo Title Text 1")
 
 => Movie data set has a wide range of genre and studios. If we keep it that way, visualization will get some troubles since there are so many variables. 
 
