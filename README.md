@@ -1,6 +1,6 @@
 # Projects with R basic & advance for data analysis and visualization
 
-These are exercises to practice and enhance my self-learn R skills to work with data & do some interesting thing:
+These are exercises to practice and enhance my self-learn R skills to work with data & do some interesting things:
   - Data Preparation
   - Data Mining
   - Data Exploration
