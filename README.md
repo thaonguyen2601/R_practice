@@ -31,7 +31,7 @@ head(movie)
 str(movie)
 ```
 ![alt text](headmovie.PNG "Logo Title Text 1")
-![alt text](str.PNG "Logo Title Text 1")
+![alt text](str.png "Logo Title Text 1")
 
 => Movie data set has a wide range of genre and studios. If we keep it that way, visualization will get some troubles since there are so many variables. 
 
@@ -74,7 +74,7 @@ studio2 <- rbind(studio.data, studio.data2)
 o <- ggplot(data=movie.data, aes(x=IMDB, y=MovieLens, color=Genre))
 o + geom_point() + geom_smooth(fill=NA)
 ```
-![alt text](Rplot_LensvsIMDB.PNG "Logo Title Text 1")
+![alt text](Rplot_LensvsIMDB.png "Logo Title Text 1")
 
 => From the the scatterplot, we can see that 2 websites have a positive correlation. Therefore, in my preference, I will use IMDB score as the standard movie rating in this exercise 
 
@@ -85,7 +85,7 @@ o + geom_point(aes(x=BudgetM, y=GrossM)) + geom_smooth(aes(x=BudgetM, y=GrossM),
   xlab('Budget Millions')  +
   ylab('Gross Millions')
 ```
-![alt text](Rplot_BudvsRev.PNG "Logo Title Text 1")
+![alt text](Rplot_BudvsRev.png "Logo Title Text 1")
 
 => Positive correlation between Budget and Sales, the more you give, the more you get. However, be noted that this is not a constant situation and can not apply to Comedy.
 
@@ -99,7 +99,7 @@ s + geom_histogram(aes(fill=Genre), color='White') +
   labs(title='Growth of Movie industry by Genre') +
   theme_ipsum()
 ```
-![alt text](Rplot_growthmovie.PNG "Logo Title Text 1")
+![alt text](Rplot_growthmovie.png "Logo Title Text 1")
 
 => Movie industry starts exploding since the 1980s, with fast-speed increase in no. of movies, leading by Action, Animation & Comedy
 
@@ -114,7 +114,7 @@ n + geom_boxplot(outlier.shape = NA) + coord_cartesian(ylim=c(0,1000)) +
   ylab('mUSD') +
   theme_ipsum()
 ```
-![alt text](Rplot_AvgBudnPro.PNG "Logo Title Text 1")
+![alt text](Rplot_AvgBudnPro.png "Logo Title Text 1")
 
 => We can see that Action movies have high Budget but bring the lowest Profit among Genre, which leads to the lowest %Profit/Revenue. Sci-fi has the same situation but quite better. Drama & Comedy on the other hand, have both low Budget and Profit in terms of value, but have highest %Profit/Revenue. 
 ...picture
@@ -145,7 +145,7 @@ ggplot() +
   theme_ipsum()
 ```
 
-![alt text](Rplot_RevnPro.PNG "Logo Title Text 1")
+![alt text](Rplot_RevnPro.png "Logo Title Text 1")
 
 => Buena Vista is the highest revenue & profit studio throughout the period. And guess what? It's Walt Disney! Following by WB (Warner Bros) & Fox. 
 However, when looking at Profit/Revenue,  Universal seems to be the leader with 80% return.
