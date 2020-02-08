@@ -7,7 +7,7 @@ These are exercises to practice and enhance my self-learn R skills to work with 
   - Data Analysis
   - Data Visualization
 
-# Exercises: 
+# Exercise 1: 
 Working with data of more than 600 movies in different genre, ratings, budget & profits to figure out helpful insights
 
 
@@ -117,7 +117,7 @@ n + geom_boxplot(outlier.shape = NA) + coord_cartesian(ylim=c(0,1000)) +
 ![alt text](Rplot_AvgBudnPro.png "Logo Title Text 1")
 
 => We can see that Action movies have high Budget but bring the lowest Profit among Genre, which leads to the lowest %Profit/Revenue. Sci-fi has the same situation but quite better. Drama & Comedy on the other hand, have both low Budget and Profit in terms of value, but have highest %Profit/Revenue. 
-...picture
+
 
 * **_Revenue & Profit of each Studio during 10 years_**
 ```sh
@@ -127,7 +127,6 @@ bar_lab <- studio.data %>%
 
 bar_lab
 bar_lab <- as.data.frame(bar_lab)
-bar_lab$ProfitPer <- paste(bar_lab$ProfitPer, '%')
 
 library(reshape2)
 bar_lab2 <- melt(bar_lab2, id.vars = 'Studio')
@@ -149,6 +148,124 @@ ggplot() +
 
 => Buena Vista is the highest revenue & profit studio throughout the period. And guess what? It's Walt Disney! Following by WB (Warner Bros) & Fox. 
 However, when looking at Profit/Revenue,  Universal seems to be the leader with 80% return.
+
+
+# Exercise 2:
+
+Working with dataset of 500 companies in various indutries across USA to measure how they've performed.
+
+**_Step 1: Insert the dataset & look through data_** 
+```sh
+fin <- read.csv('P3-Future-500-The-Dataset.csv', na.strings = c(''))
+```
+=> We replace blank space with N/A in order to easier detect missing values
+```sh
+summary(fin)
+str(fin)
+```
+![alt text](strfin.PNG "Logo Title Text 1")
+![alt text](summary.PNG "Logo Title Text 1")
+
+=> Dataset has structure like in the picture above, with some 3 columns Revenue/ Expenses/ Growth should have been classified as "Number" instead of "Factor", vice versa for column "ID"
+
+**_Step 2: Converting to proper formats for further analysis_** 
+
+```sh
+fin$ID <- factor(fin$ID)
+
+fin$Expenses <- gsub(' Dollars','', fin$Expenses)
+fin$Expenses <- gsub(',','', fin$Expenses)
+fin$Revenue <- sub('\\$','', fin$Revenue)
+fin$Revenue <- gsub(',','', fin$Revenue)
+fin$Growth <- gsub('%','', fin$Growth)
+
+fin$Expenses <- as.numeric(fin$Expenses)
+fin$Revenue <- as.numeric(fin$Revenue)
+fin$Growth <- as.numeric(fin$Growth)
+```
+=> After adjusting, ID type is now factor. Expenses/Profit/Growth are now numeric values. 
+
+**_Step 3: Replacing missing data with proper methods so that it will not affect our analysis results_**
+- Locating missing data:
+```sh
+nrow(fin[!complete.cases(fin),])
+fin[!complete.cases(fin),]
+```
+![alt text](nrow+missing.PNG "Logo Title Text 1")
+
+=> The dataset has total 12 rows with missing data.
+2 in column Industry, 1 in Inception, 2 in Employees, 4 in States, 2 in each Revenue/Expense/Profit and 1 in Growth
+
+
+- For column Industry & Inception, search online to see whether we have any information about the company, remove rows if couldn't find out the result and reset data frame index
+```sh
+fin_backup <- fin #Backup data before editing anything
+
+#For Techline, result is IT Services => replace N/A with correct data
+fin[fin$Name == 'Techline',3] <- c('IT Services')
+#For Cityace & Lathotline, no result found => remove it from the dataset
+fin <- fin[!is.na(fin$Industry),]
+fin <- fin[!is.na(fin$Inception),]
+
+#Reset row index
+rownames(fin) <- NULL
+```
+
+- For column State, use factual data and asign for the missing ones
+```sh
+fin[is.na(fin$State) & fin$City=='New York','State'] <- 'NY'
+fin[is.na(fin$State) & fin$City=='San Francisco','State'] <- 'CA'
+```
+
+- For column Revenue/Expenses/Employees/Growth, use median imputation method by calculating the average of according industry
+```sh
+med_emp_retail <- median(fin[fin$Industry=='Retail','Employees'], na.rm = TRUE)
+fin[is.na(fin$Employees) & fin$Industry=='Retail','Employees'] <- med_emp_retail
+
+med_emp_finser <- median(fin[fin$Industry=='Financial Services','Employees'], na.rm = TRUE)
+fin[is.na(fin$Employees) & fin$Industry=='Financial Services','Employees'] <- med_emp_finser
+
+med_growth_cons <- median(fin[fin$Industry=='Construction','Growth'], na.rm = TRUE)
+fin[is.na(fin$Growth) & fin$Industry=='Construction', 'Growth'] <- med_growth_cons
+
+med_rev_cons <- median(fin[fin$Industry=='Construction','Revenue'], na.rm = TRUE)
+fin[is.na(fin$Revenue) & fin$Industry=='Construction', 'Revenue'] <- med_rev_cons
+
+med_exp_cons <- median(fin[fin$Industry=='Construction','Expenses'], na.rm = TRUE)
+fin[is.na(fin$Expenses) & fin$Industry=='Construction', 'Expenses'] <- med_exp_cons
+```
+- Finally, when missing only 1 component among 3 (Revenue/Expenses/Profit), we can derive the value by adding/subtracting 2 others:
+```sh
+fin[is.na(fin$Profit),'Profit'] <- fin[is.na(fin$Profit),'Revenue'] - fin[is.na(fin$Profit),'Expenses']
+
+fin[is.na(fin$Expenses),'Expenses'] <- fin[is.na(fin$Expenses),'Revenue'] - fin[is.na(fin$Expenses),'Profit']
+```
+
+Check again to see whether there is any other missing record
+```sh
+fin[is.na(fin),]
+```
+![alt text](nomissing.PNG "Logo Title Text 1")
+
+**_Step 4: Visualizing the result_**
+
+- Revenue/ Expenses/ Profit trend by Industry
+
+![alt text](Rplot_RevExPro.PNG "Logo Title Text 1")
+
+=> IT Services is the champion with highest Profit - it's also the segment generating highest average Revenue among all industries - while Financial Services and Retail are following up in the second tier. Other industries have a wide range of Revenue/Expenses leading to diversified Profit results.
+
+- Growth Rate by Industry
+
+![alt text](Rplot_growthindustry.PNG "Logo Title Text 1")
+
+=> Growth Rate are quite understandable with new & modern services (in cluding IT, Finance & Software) having high rate,  while other old & traditional ones (Construction, Health, Gov Services...) are lower.
+
+
+
+
+
+
 
 
 
