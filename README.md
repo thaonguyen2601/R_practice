@@ -116,12 +116,12 @@ n + geom_boxplot(outlier.shape = NA) + coord_cartesian(ylim=c(0,1000)) +
 ```
 ![alt text](Rplot_AvgBudnPro.png "Logo Title Text 1")
 
-=> Eventhough Action has really high Budget, it's still in the top lowest Profit, which leads to the lowest %Profit/Revenue. 
+=> Even though Action has really high Budget, it's still in the top lowest Profit, which leads to the lowest %Profit/Revenue. 
 Sci-fi situation is quite better, when returning the most average Profit. 
 Drama & Comedy, on the other hand, have both low Budget and Profit in terms of value, but have highest %Profit/Revenue. 
 
 
-* **_Revenue & Profit of each Studio during 10 years_**
+* **_Revenue & Profit of each Studio during the whole period_**
 ```sh
 bar_lab <- studio.data %>%
   group_by(Studio) %>%
