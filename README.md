@@ -163,10 +163,10 @@ fin <- read.csv('P3-Future-500-The-Dataset.csv', na.strings = c(''))
 summary(fin)
 str(fin)
 ```
-![alt text](strfin.PNG "Logo Title Text 1")
-![alt text](summary.PNG "Logo Title Text 1")
+![alt text](strfin.png "Logo Title Text 1")
+![alt text](summary.png "Logo Title Text 1")
 
-=> Dataset has structure like in the picture above, with some 3 columns Revenue/ Expenses/ Growth should have been classified as "Number" instead of "Factor", vice versa for column "ID"
+=> Dataset has structure like in the picture above, with 3 columns Revenue/ Expenses/ Growth should have been classified as "Number" instead of "Factor", vice versa for column "ID"
 
 **_Step 2: Converting to proper formats for further analysis_** 
 
@@ -191,7 +191,7 @@ fin$Growth <- as.numeric(fin$Growth)
 nrow(fin[!complete.cases(fin),])
 fin[!complete.cases(fin),]
 ```
-![alt text](nrow+missing.PNG "Logo Title Text 1")
+![alt text](nrow+missing.png "Logo Title Text 1")
 
 => The dataset has total 12 rows with missing data.
 2 in column Industry, 1 in Inception, 2 in Employees, 4 in States, 2 in each Revenue/Expense/Profit and 1 in Growth
@@ -245,19 +245,19 @@ Check again to see whether there is any other missing record
 ```sh
 fin[is.na(fin),]
 ```
-![alt text](nomissing.PNG "Logo Title Text 1")
+![alt text](nomissing.png "Logo Title Text 1")
 
 **_Step 4: Visualizing the result_**
 
 - Revenue/ Expenses/ Profit trend by Industry
 
-![alt text](Rplot_RevExPro.PNG "Logo Title Text 1")
+![alt text](Rplot_RevExPro.png "Logo Title Text 1")
 
 => IT Services is the champion with highest Profit - it's also the segment generating highest average Revenue among all industries - while Financial Services and Retail are following up in the second tier. Other industries have a wide range of Revenue/Expenses leading to diversified Profit results.
 
 - Growth Rate by Industry
 
-![alt text](Rplot_growthindustry.PNG "Logo Title Text 1")
+![alt text](Rplot_growthindustry.png "Logo Title Text 1")
 
 => Growth Rate are quite understandable with new & modern services (in cluding IT, Finance & Software) having high rate,  while other old & traditional ones (Construction, Health, Gov Services...) are lower.
 
