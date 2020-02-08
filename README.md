@@ -116,7 +116,9 @@ n + geom_boxplot(outlier.shape = NA) + coord_cartesian(ylim=c(0,1000)) +
 ```
 ![alt text](Rplot_AvgBudnPro.png "Logo Title Text 1")
 
-=> We can see that Action movies have high Budget but bring the lowest Profit among Genre, which leads to the lowest %Profit/Revenue. Sci-fi has the same situation but quite better. Drama & Comedy on the other hand, have both low Budget and Profit in terms of value, but have highest %Profit/Revenue. 
+=> Eventhough Action has really high Budget, it's still in the top lowest Profit, which leads to the lowest %Profit/Revenue. 
+Sci-fi situation is quite better, when returning the most average Profit. 
+Drama & Comedy, on the other hand, have both low Budget and Profit in terms of value, but have highest %Profit/Revenue. 
 
 
 * **_Revenue & Profit of each Studio during 10 years_**
